@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManangerBehaviour : MonoBehaviour {
 
     public enum AlienType { AlienBee, AlienMoth, AlienOwl, AlienDemonOwl };
-    Dictionary <string, int> deathsDict;
+    public Dictionary <string, int> deathsDict;
     public static GameManangerBehaviour instance;
 
     public GameObject[] alienFormationList;
@@ -98,7 +98,11 @@ public class GameManangerBehaviour : MonoBehaviour {
         {
             SceneManager.LoadScene("GameOver");
         }
-        livesPanel[lives].SetActive(!livesPanel[lives]);
-        lives--;
+        else
+        {
+            livesPanel[lives].SetActive(!livesPanel[lives]);
+            lives--;
+        }
+        
     }
 }
