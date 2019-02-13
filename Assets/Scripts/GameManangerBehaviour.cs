@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManangerBehaviour : MonoBehaviour {
 
-    public enum AlienType { AlienBee, AlienMoth, AlienOwl, AlienDemonOwl };
-    public Dictionary <string, int> deathsDict;
     public static GameManangerBehaviour instance;
 
+    public enum AlienType { AlienBee, AlienMoth, AlienOwl, AlienDemonOwl };
+    public Dictionary <string, int> deathsDict;
     public GameObject[] alienFormationList;
     public GameObject[] alienList;
     [HideInInspector] public GameObject[] playerShipIconList;
@@ -16,7 +16,7 @@ public class GameManangerBehaviour : MonoBehaviour {
     public GameObject playerShip;
     public GameObject[] livesPanel;
     private int lives = 1;
-
+    private int activeFormationEnemiesCount;
     protected Transform activeFormation;
     protected int activeFormationIndex;
 
@@ -36,12 +36,24 @@ public class GameManangerBehaviour : MonoBehaviour {
         createFormation();
         createEnemies();
         createPlayerShip();
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (activeFormationEnemiesCount == 0)
+        {
+            activeFormationIndex++;
+            if (activeFormationIndex > alienFormationList.Length)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            else
+            {
+                createFormation();
+                createEnemies();
+            }
+            
+        }
 	}
 
     protected void createFormation()
@@ -49,9 +61,9 @@ public class GameManangerBehaviour : MonoBehaviour {
         activeFormation = Instantiate<GameObject>(alienFormationList[activeFormationIndex]).transform;
         activeFormation.SetParent(enemiesCanvas.transform);
         activeFormation.localPosition = Vector3.zero;
+        //Debug.Log("child Count: " + activeFormation.childCount);
+        activeFormationEnemiesCount = activeFormation.childCount;
     }
-
-
 
     protected void createEnemies()
     {
@@ -74,6 +86,7 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     public void onEnemieDeath(string alienKilled)
     {
+        activeFormationEnemiesCount--;
         try
         {
             deathsDict[alienKilled]++;

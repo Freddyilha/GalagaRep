@@ -37,7 +37,7 @@ public class GameOverBehaviour : MonoBehaviour {
             //Debug.Log("asdasd: " + alien.Value.ToString());
 
             enemiesTable = Instantiate<GameObject>(dynamicScorePreFab);
-            enemiesTable.transform.position = Vector2.down * lineCounter++;
+            
             // enemiesTable.transform.position = panel.transform.position;
             
 
@@ -61,7 +61,7 @@ public class GameOverBehaviour : MonoBehaviour {
             enemiesTable.GetComponent<PanelHelper>().alienSprite.sprite = alienResourceSprite;
 
             enemiesTable.GetComponent<PanelHelper>().texto.text = alien.Value.ToString();
-
+            enemiesTable.transform.position = Vector2.down * lineCounter++;
             //GetComponent<DerpHelper>().alienSprite.sprite = Resources.Load<Sprite>("Sprites/" + alien.Key);
             //GetComponent<DerpHelper>().texto.text = alien.Value.ToString();
 
