@@ -43,9 +43,12 @@ public class GameManangerBehaviour : MonoBehaviour {
         if (activeFormationEnemiesCount == 0)
         {
             activeFormationIndex++;
-            if (activeFormationIndex > alienFormationList.Length)
+            if (activeFormationIndex >= alienFormationList.Length)
             {
+                Debug.Log("Troquei!!!");
                 SceneManager.LoadScene("GameOver");
+                activeFormationEnemiesCount = 1;                 // Isso é gambiarra pensa melhor depois.
+                //SceneManager.UnloadScene("GameScene");
             }
             else
             {
