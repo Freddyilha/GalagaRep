@@ -11,6 +11,7 @@ public class GameOverBehaviour : MonoBehaviour {
     public GameObject Panel;
     public int lineCounter;
     Sprite alienResourceSprite;
+    public Text highScoreText;
     //public GameObject enemiePicture;
 
     // Use this for initialization
@@ -21,13 +22,15 @@ public class GameOverBehaviour : MonoBehaviour {
         //}
 
         //Debug.Log("iuwiwqu: " + GameManangerBehaviour.instance.deathsDict.Values);
-        scoreDict = new Dictionary<string, int>();
-        scoreDict.Add("AlienOwl", 3);
-        scoreDict.Add("AlienMoth", 6);
-        scoreDict.Add("AlienBee", 10);
+
+        //scoreDict = new Dictionary<string, int>();
+        //scoreDict.Add("AlienOwl", 3);
+        //scoreDict.Add("AlienMoth", 6);
+        //scoreDict.Add("AlienBee", 10);
 
         //Debug.Log("jjjjjjjjjjjjjj: " + scoreDict.Keys);
 
+        //highScoreText.text = GameManangerBehaviour.instance.getFinalScore().ToString();
         GameObject enemiesTable;
 
         //Debug.Log("asdasd: " + scoreDict.Keys);
@@ -45,7 +48,11 @@ public class GameOverBehaviour : MonoBehaviour {
 
             /*Eu tinha esquecido de trocar a escala estava funcionando desdo inicio
             porém quando instanciados eles vão para outra posição ignorando o painel*/
-            enemiesTable.transform.localScale = Vector3.one;
+            enemiesTable.transform.localScale = Vector2.one;
+            //enemiesTable.transform.position = Panel.transform.position; 
+            //enemiesTable.transform.position = Vector2.up * 40;
+            //enemiesTable.transform = Panel.transform;
+            enemiesTable.transform.position = Vector2.down * lineCounter++;
             //Debug.Log("dict: " + alien);
             //Debug.Log("dict: " + alien.GetType());
             //Debug.Log("Key: " + alien.Key);
@@ -61,7 +68,8 @@ public class GameOverBehaviour : MonoBehaviour {
             enemiesTable.GetComponent<PanelHelper>().alienSprite.sprite = alienResourceSprite;
 
             enemiesTable.GetComponent<PanelHelper>().texto.text = alien.Value.ToString();
-            enemiesTable.transform.position = Vector2.down * lineCounter++;
+            
+
             //GetComponent<DerpHelper>().alienSprite.sprite = Resources.Load<Sprite>("Sprites/" + alien.Key);
             //GetComponent<DerpHelper>().texto.text = alien.Value.ToString();
 

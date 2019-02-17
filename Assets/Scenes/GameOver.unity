@@ -230,6 +230,7 @@ MonoBehaviour:
     type: 3}
   Panel: {fileID: 366559071}
   lineCounter: 0
+  highScoreText: {fileID: 734523223}
 --- !u!1 &39976480
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +345,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 6, y: -208}
+  m_AnchoredPosition: {x: 1, y: -254}
   m_SizeDelta: {x: 212.7, y: 172.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &734523221
@@ -690,7 +691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 4, y: -59.1}
+  m_AnchoredPosition: {x: 3, y: -70}
   m_SizeDelta: {x: 148.9, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223821015

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManangerBehaviour : MonoBehaviour {
 
@@ -11,14 +12,17 @@ public class GameManangerBehaviour : MonoBehaviour {
     public Dictionary <string, int> deathsDict;
     public GameObject[] alienFormationList;
     public GameObject[] alienList;
+    public Text scoreText;
+    private int scoreTextToInt;
     [HideInInspector] public GameObject[] playerShipIconList;
     public Transform enemiesCanvas;
     public GameObject playerShip;
     public GameObject[] livesPanel;
-    private int lives = 1;
+    private int lives = 0;
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
     protected int activeFormationIndex;
+    private bool gameOverFlag;
 
     void Awake()
     {
@@ -36,28 +40,32 @@ public class GameManangerBehaviour : MonoBehaviour {
         createFormation();
         createEnemies();
         createPlayerShip();
+        gameOverFlag = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (activeFormationEnemiesCount == 0)
+        if (gameOverFlag == false)
         {
-            activeFormationIndex++;
-            if (activeFormationIndex >= alienFormationList.Length)
+            if (activeFormationEnemiesCount == 0)
             {
-                Debug.Log("Troquei!!!");
-                SceneManager.LoadScene("GameOver");
-                activeFormationEnemiesCount = 1;                 // Isso é gambiarra pensa melhor depois.
-                //SceneManager.UnloadScene("GameScene");
-            }
-            else
-            {
-                createFormation();
-                createEnemies();
-            }
+                activeFormationIndex++;
+                if (activeFormationIndex >= alienFormationList.Length)
+                {
+                    //Debug.Log("Troquei!!!");
+                    SceneManager.LoadScene("GameOver");
+                    gameOverFlag = true;
+                    //SceneManager.UnloadScene("GameScene");
+                }
+                else
+                {
+                    createFormation();
+                    createEnemies();
+                }
             
+            }
         }
-	}
+    }
 
     protected void createFormation()
     {
@@ -89,6 +97,9 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     public void onEnemieDeath(string alienKilled)
     {
+        int.TryParse(scoreText.text, out scoreTextToInt);
+        scoreTextToInt += 50;
+        scoreText.text = scoreTextToInt.ToString();
         activeFormationEnemiesCount--;
         try
         {
@@ -105,7 +116,6 @@ public class GameManangerBehaviour : MonoBehaviour {
         GameObject player;
         player = Instantiate<GameObject>(playerShip);
         player.transform.position = new Vector2(-0.1f, -4.75f); 
-
     }
 
     public void onPlayerHit()
@@ -119,6 +129,10 @@ public class GameManangerBehaviour : MonoBehaviour {
             livesPanel[lives].SetActive(!livesPanel[lives]);
             lives--;
         }
-        
+    }
+
+    public int getFinalScore()
+    {
+        return scoreTextToInt;
     }
 }
