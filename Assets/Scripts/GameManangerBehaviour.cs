@@ -15,14 +15,19 @@ public class GameManangerBehaviour : MonoBehaviour {
     public Text scoreText;
     private int scoreTextToInt;
     [HideInInspector] public GameObject[] playerShipIconList;
-    public Transform enemiesCanvas;
     public GameObject playerShip;
     public GameObject[] livesPanel;
     private int lives = 0;
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
     protected int activeFormationIndex;
-    private bool gameOverFlag;
+    private bool gameReseted;
+    [SerializeField] private AudioSource[] audios = new AudioSource[2];
+    [SerializeField] private Sprite LiveSprite;
+    [SerializeField] private GameObject LivePrefab;
+    private GameObject Live;
+    //[SerializeField] private GameObject EnemiesFormationPrefab; // A REFERENCIA PARA UM OBJETO NÃO É PERDIDA MAS A REFERENCIA PRO TRANSFORM DELE SIM
+    //private Transform enemiesFormationTransform;
 
     void Awake()
     {
@@ -31,46 +36,46 @@ public class GameManangerBehaviour : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(enemiesFormationTransform);
     }
 
     // Use this for initialization
     void Start () {
-        deathsDict = new Dictionary<string, int>();
-        activeFormationIndex = 0;
-        createFormation();
-        createEnemies();
-        createPlayerShip();
-        gameOverFlag = false;
+        onNewGame();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameOverFlag == false)
+        if (activeFormationEnemiesCount == 0)
         {
-            if (activeFormationEnemiesCount == 0)
+            activeFormationIndex++;
+            if (activeFormationIndex >= alienFormationList.Length)
             {
-                activeFormationIndex++;
-                if (activeFormationIndex >= alienFormationList.Length)
-                {
-                    //Debug.Log("Troquei!!!");
-                    SceneManager.LoadScene("GameOver");
-                    gameOverFlag = true;
-                    //SceneManager.UnloadScene("GameScene");
-                }
-                else
-                {
-                    createFormation();
-                    createEnemies();
-                }
-            
+                //Debug.Log("Troquei!!!");
+                //gameReseted = true;
+                SceneManager.LoadScene("GameOver");                    
+                //SceneManager.UnloadScene("GameScene");
+            }
+            else
+            {
+                createFormation();
+                createEnemies();
             }
         }
+        if (gameReseted == true)
+        {
+            onNewGame();
+            Debug.Log("Cheguei aqui!");
+        }
+        //Debug.Log("Flag: " + gameReseted);
+
     }
 
     protected void createFormation()
     {
+        //enemiesFormationTransform = Instantiate<GameObject>(EnemiesFormationPrefab).transform; //EnemiesFormationRef.GetComponent<Transform>();
         activeFormation = Instantiate<GameObject>(alienFormationList[activeFormationIndex]).transform;
-        activeFormation.SetParent(enemiesCanvas.transform);
+        //activeFormation.SetParent(enemiesFormationTransform.transform);
         activeFormation.localPosition = Vector3.zero;
         //Debug.Log("child Count: " + activeFormation.childCount);
         activeFormationEnemiesCount = activeFormation.childCount;
@@ -115,13 +120,21 @@ public class GameManangerBehaviour : MonoBehaviour {
     {
         GameObject player;
         player = Instantiate<GameObject>(playerShip);
-        player.transform.position = new Vector2(-0.1f, -4.75f); 
+        player.transform.position = new Vector2(-0.1f, -4.75f);
+        lives = 2;
+        Live = Instantiate<GameObject>(LivePrefab);
+        Live.transform.SetParent(livesPanel[0].transform);   // ISSO FUNCIONA MAS NÃO LEMBRO O PÔRQUE!
+        Live.transform.localScale = Vector2.one;
+        Live.GetComponent<Image>().sprite = LiveSprite;
+        
+        //Live.transform.position = new Vector2(7f, -5f);
     }
 
     public void onPlayerHit()
     {
         if (lives == -1)
         {
+            //enemiesFormationTransform.
             SceneManager.LoadScene("GameOver");
         }
         else
@@ -131,8 +144,23 @@ public class GameManangerBehaviour : MonoBehaviour {
         }
     }
 
+    public void onNewGame()
+    {
+        deathsDict = new Dictionary<string, int>();
+        activeFormationIndex = 0;
+        createFormation();
+        createEnemies();
+        createPlayerShip();
+        gameReseted = false;
+    }
+
     public int getFinalScore()
     {
         return scoreTextToInt;
+    }
+
+    public void setResetGameFlag()
+    {
+        gameReseted = true;
     }
 }
