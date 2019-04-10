@@ -15,10 +15,10 @@ public class GameOverBehaviour : MonoBehaviour {
     
     void Start () {
         lineCounter = -2;           /* Valor usado para alinhar os inimigos mortos com o texto GALAGA */
-        scoreDict = new Dictionary<string, int>();
-        scoreDict.Add("AlienOwl", 3);
-        scoreDict.Add("AlienMoth", 6);
-        scoreDict.Add("AlienBee", 10);
+        //scoreDict = new Dictionary<string, int>();
+        //scoreDict.Add("AlienOwl", 3);
+        //scoreDict.Add("AlienMoth", 6);
+        //scoreDict.Add("AlienBee", 10);
 
         GameObject enemiesTable;
 

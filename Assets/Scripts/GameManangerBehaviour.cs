@@ -23,9 +23,12 @@ public class GameManangerBehaviour : MonoBehaviour {
     protected int activeFormationIndex;
     private bool gameReseted;
     [SerializeField] private AudioSource[] audios = new AudioSource[2];
-    [SerializeField] private Sprite LiveSprite;
-    [SerializeField] private GameObject LivePrefab;
-    private GameObject Live;
+    [SerializeField] private GameObject liveTest;
+    [SerializeField] private GameObject LiveCellPrefab;
+    [SerializeField] private GameObject gameCanvas;
+    [HideInInspector] public List<GameObject> livesList;
+    //private GameObject Live;
+    //private GameObject TestLive;
     //[SerializeField] private GameObject EnemiesFormationPrefab; // A REFERENCIA PARA UM OBJETO NÃO É PERDIDA MAS A REFERENCIA PRO TRANSFORM DELE SIM
     //private Transform enemiesFormationTransform;
 
@@ -42,7 +45,11 @@ public class GameManangerBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start () {
         onNewGame();
-	}
+        //TestLive = Instantiate<GameObject>(
+        livesPanel[2].gameObject.SetActive(true);
+        livesPanel[3].gameObject.SetActive(true);
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -67,8 +74,7 @@ public class GameManangerBehaviour : MonoBehaviour {
             onNewGame();
             Debug.Log("Cheguei aqui!");
         }
-        //Debug.Log("Flag: " + gameReseted);
-
+        //Debug.Log("Flag: " + gameReseted)
     }
 
     protected void createFormation()
@@ -102,6 +108,7 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     public void onEnemieDeath(string alienKilled)
     {
+        Debug.Log("quem morreu: " + alienKilled);
         int.TryParse(scoreText.text, out scoreTextToInt);
         scoreTextToInt += 50;
         scoreText.text = scoreTextToInt.ToString();
@@ -121,13 +128,27 @@ public class GameManangerBehaviour : MonoBehaviour {
         GameObject player;
         player = Instantiate<GameObject>(playerShip);
         player.transform.position = new Vector2(-0.1f, -4.75f);
-        lives = 2;
-        Live = Instantiate<GameObject>(LivePrefab);
-        Live.transform.SetParent(livesPanel[0].transform);   // ISSO FUNCIONA MAS NÃO LEMBRO O PÔRQUE!
-        Live.transform.localScale = Vector2.one;
-        Live.GetComponent<Image>().sprite = LiveSprite;
+        lives = 1;
+    }
+
+    protected void createHUD()
+    {
+        GameObject liveCell;
+        liveCell = Instantiate<GameObject>(LiveCellPrefab);
+        liveCell.transform.SetParent(gameCanvas.transform);
+        liveCell.transform.localScale = Vector2.one;
+        liveCell.transform.localPosition = new Vector2(-327.15f, -214.75f);         /*Canto esquerdo inferior*/
+        GameObject Live;
+        for (int i = -4; i < -2; i++)   /*Usado para mover do limite esquerdo para a direita*/
+        {
+            Live = Instantiate<GameObject>(liveTest);
+            Live.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/ship");
+            Live.transform.SetParent(liveCell.transform);
+            Live.transform.localScale = new Vector2(0.2f, 0.2f);
+            Live.transform.localPosition = Vector2.right * i * 18;//new Vector2(-70.5f, 0f);
+            livesList.Add(Live);
+        }
         
-        //Live.transform.position = new Vector2(7f, -5f);
     }
 
     public void onPlayerHit()
@@ -139,7 +160,9 @@ public class GameManangerBehaviour : MonoBehaviour {
         }
         else
         {
-            livesPanel[lives].SetActive(!livesPanel[lives]);
+            //livesPanel[lives].SetActive(!livesPanel[lives]);
+            Destroy(livesList[livesList.Count - 1]);
+            livesList.RemoveAt(livesList.Count - 1);
             lives--;
         }
     }
@@ -151,6 +174,7 @@ public class GameManangerBehaviour : MonoBehaviour {
         createFormation();
         createEnemies();
         createPlayerShip();
+        createHUD();
         gameReseted = false;
     }
 
