@@ -196,8 +196,6 @@ GameObject:
   m_Component:
   - component: {fileID: 385171020}
   - component: {fileID: 385171021}
-  - component: {fileID: 385171023}
-  - component: {fileID: 385171022}
   m_Layer: 0
   m_Name: GameMananger
   m_TagString: Untagged
@@ -241,6 +239,7 @@ MonoBehaviour:
   - {fileID: 1759896859400338, guid: da9ade90493c6c3439b7e53477706618, type: 3}
   scoreText: {fileID: 983469878}
   playerShipIconList: []
+  enemiesCanvas: {fileID: 1434612957}
   playerShip: {fileID: 739627887627192644, guid: 667f523b4ed34ba459059cf63b80692d,
     type: 3}
   livesPanel:
@@ -250,6 +249,7 @@ MonoBehaviour:
   - {fileID: 1437248054}
   - {fileID: 1064788205}
   - {fileID: 140394871}
+<<<<<<< HEAD
   audios:
   - {fileID: 385171023}
   - {fileID: 385171022}
@@ -450,6 +450,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+>>>>>>> parent of cb14716... Otimizations
 --- !u!1 &414488823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1082,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378892243}
   m_CullTransparentMesh: 0
+--- !u!1 &1434612956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434612957}
+  m_Layer: 0
+  m_Name: EnemiesFormations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1434612957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434612956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 0.12, z: 10.003519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437248054
 GameObject:
   m_ObjectHideFlags: 0

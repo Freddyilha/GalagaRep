@@ -425,8 +425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.395005, y: 2.1}
-  m_SizeDelta: {x: 277.09, y: 132.4}
+  m_AnchoredPosition: {x: -11, y: 0.0000013113}
+  m_SizeDelta: {x: 221.39, y: 102.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &323337745
 MonoBehaviour:
@@ -461,9 +461,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "This project was developed by Freddy da Paz Ilha at Izyversity, at the
-    course Programa\xE7\xE3o de Games com Unity - Essencial.\nSong and SFXs used were
-    downloaded from: https://downloads.khinsider.com/"
+  m_Text: "This project was developed by Freddy da Paz Ilha at Izyversity course Programa\xE7\xE3o
+    de Games com Unity - Essencial."
 --- !u!222 &323337746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -909,8 +908,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -175, y: 156}
-  m_SizeDelta: {x: 317.3, y: 149.4}
+  m_AnchoredPosition: {x: -151.95, y: 186.3}
+  m_SizeDelta: {x: 278.55, y: 136.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1056538607
 GameObject:
@@ -1405,7 +1404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.89998, y: 59.699997}
+  m_AnchoredPosition: {x: 122.52, y: 53.245}
   m_SizeDelta: {x: 33.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1935865002
