@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,16 +9,13 @@ public class GameOverBehaviour : MonoBehaviour {
     Dictionary <string, int> scoreDict;
     public GameObject dynamicScorePreFab;
     public GameObject Panel;
-    public int lineCounter;
+    [HideInInspector] public int lineCounter;
     Sprite alienResourceSprite;
     public Text highScoreText;
     //public GameObject enemiePicture;
 
     // Use this for initialization
     void Start () {
-<<<<<<< HEAD
-        lineCounter = -2;           /* Valor usado para alinhar os inimigos mortos com o texto GALAGA */
-=======
         //foreach (var alien in GameManangerBehaviour.instance.deathsDict)
         //{
         //    Debug.Log("Key: " + alien.Key + " -- Value: " + alien.Value);
@@ -26,22 +23,18 @@ public class GameOverBehaviour : MonoBehaviour {
 
         //Debug.Log("iuwiwqu: " + GameManangerBehaviour.instance.deathsDict.Values);
 
->>>>>>> parent of cb14716... Otimizations
         //scoreDict = new Dictionary<string, int>();
         //scoreDict.Add("AlienOwl", 3);
         //scoreDict.Add("AlienMoth", 6);
         //scoreDict.Add("AlienBee", 10);
-<<<<<<< HEAD
-=======
 
         //Debug.Log("jjjjjjjjjjjjjj: " + scoreDict.Keys);
->>>>>>> parent of cb14716... Otimizations
 
         //highScoreText.text = GameManangerBehaviour.instance.getFinalScore().ToString();
         GameObject enemiesTable;
 
         //Debug.Log("asdasd: " + scoreDict.Keys);
-
+        lineCounter = -2;       /*Valor usado para a alinhar os inimigos derrotados com texto Galaga*/
         foreach (var alien in GameManangerBehaviour.instance.deathsDict)
         {
             //Debug.Log("asdasd: " + alien.Value.ToString());

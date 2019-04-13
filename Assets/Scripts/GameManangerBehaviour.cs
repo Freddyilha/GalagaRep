@@ -22,20 +22,7 @@ public class GameManangerBehaviour : MonoBehaviour {
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
     protected int activeFormationIndex;
-<<<<<<< HEAD
-    private bool gameReseted;
-    [SerializeField] private AudioSource[] audios = new AudioSource[2];
-    [SerializeField] private GameObject liveTest;
-    [SerializeField] private GameObject LiveCellPrefab;
-    [SerializeField] private GameObject gameCanvas;
-    [HideInInspector] public List<GameObject> livesList;
-    //private GameObject Live;
-    //private GameObject TestLive;
-    //[SerializeField] private GameObject EnemiesFormationPrefab; // A REFERENCIA PARA UM OBJETO NÃO É PERDIDA MAS A REFERENCIA PRO TRANSFORM DELE SIM
-    //private Transform enemiesFormationTransform;
-=======
     private bool gameOverFlag;
->>>>>>> parent of cb14716... Otimizations
 
     void Awake()
     {
@@ -48,14 +35,6 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-<<<<<<< HEAD
-        onNewGame();
-        //TestLive = Instantiate<GameObject>(
-        livesPanel[2].gameObject.SetActive(true);
-        livesPanel[3].gameObject.SetActive(true);
-        
-    }
-=======
         deathsDict = new Dictionary<string, int>();
         activeFormationIndex = 0;
         createFormation();
@@ -63,7 +42,6 @@ public class GameManangerBehaviour : MonoBehaviour {
         createPlayerShip();
         gameOverFlag = false;
 	}
->>>>>>> parent of cb14716... Otimizations
 	
 	// Update is called once per frame
 	void Update () {
@@ -87,10 +65,6 @@ public class GameManangerBehaviour : MonoBehaviour {
             
             }
         }
-<<<<<<< HEAD
-        //Debug.Log("Flag: " + gameReseted)
-=======
->>>>>>> parent of cb14716... Otimizations
     }
 
     protected void createFormation()
@@ -123,7 +97,6 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     public void onEnemieDeath(string alienKilled)
     {
-        Debug.Log("quem morreu: " + alienKilled);
         int.TryParse(scoreText.text, out scoreTextToInt);
         scoreTextToInt += 50;
         scoreText.text = scoreTextToInt.ToString();
@@ -142,32 +115,7 @@ public class GameManangerBehaviour : MonoBehaviour {
     {
         GameObject player;
         player = Instantiate<GameObject>(playerShip);
-<<<<<<< HEAD
-        player.transform.position = new Vector2(-0.1f, -4.75f);
-        lives = 1;
-    }
-
-    protected void createHUD()
-    {
-        GameObject liveCell;
-        liveCell = Instantiate<GameObject>(LiveCellPrefab);
-        liveCell.transform.SetParent(gameCanvas.transform);
-        liveCell.transform.localScale = Vector2.one;
-        liveCell.transform.localPosition = new Vector2(-327.15f, -214.75f);         /*Canto esquerdo inferior*/
-        GameObject Live;
-        for (int i = -4; i < -2; i++)   /*Usado para mover do limite esquerdo para a direita*/
-        {
-            Live = Instantiate<GameObject>(liveTest);
-            Live.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/ship");
-            Live.transform.SetParent(liveCell.transform);
-            Live.transform.localScale = new Vector2(0.2f, 0.2f);
-            Live.transform.localPosition = Vector2.right * i * 18;//new Vector2(-70.5f, 0f);
-            livesList.Add(Live);
-        }
-        
-=======
         player.transform.position = new Vector2(-0.1f, -4.75f); 
->>>>>>> parent of cb14716... Otimizations
     }
 
     public void onPlayerHit()
@@ -178,27 +126,11 @@ public class GameManangerBehaviour : MonoBehaviour {
         }
         else
         {
-            //livesPanel[lives].SetActive(!livesPanel[lives]);
-            Destroy(livesList[livesList.Count - 1]);
-            livesList.RemoveAt(livesList.Count - 1);
+            livesPanel[lives].SetActive(!livesPanel[lives]);
             lives--;
         }
     }
 
-<<<<<<< HEAD
-    public void onNewGame()
-    {
-        deathsDict = new Dictionary<string, int>();
-        activeFormationIndex = 0;
-        createFormation();
-        createEnemies();
-        createPlayerShip();
-        createHUD();
-        gameReseted = false;
-    }
-
-=======
->>>>>>> parent of cb14716... Otimizations
     public int getFinalScore()
     {
         return scoreTextToInt;
