@@ -28,19 +28,15 @@ public class GameManangerBehaviour : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        else if (instance != this)
+        else
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
     void Start () {
-        deathsDict = new Dictionary<string, int>();
-        activeFormationIndex = 0;
-        createFormation();
-        createEnemies();
-        createPlayerShip();
-        gameOverFlag = false;
+        StartCoroutine(waitForFanfare());
+        
 	}
 	
 	// Update is called once per frame
@@ -134,5 +130,23 @@ public class GameManangerBehaviour : MonoBehaviour {
     public int getFinalScore()
     {
         return scoreTextToInt;
+    }
+
+    public void onNewGame()
+    {
+        deathsDict = new Dictionary<string, int>();
+        activeFormationIndex = 0;
+        createFormation();
+        createEnemies();
+        createPlayerShip();
+        gameOverFlag = false;
+    }
+    
+    public IEnumerator waitForFanfare()
+    {
+        AudioManagerBehaviour.instance.Play("Fanfare");
+        gameOverFlag = true;
+        yield return new WaitForSecondsRealtime(7);
+        onNewGame();
     }
 }

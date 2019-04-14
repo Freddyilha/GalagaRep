@@ -38,6 +38,7 @@ public class AlienBehaviour : MonoBehaviour {
             GameObject bullet;
             bullet = Instantiate<GameObject>(bulletPreFab);
             bullet.transform.position = GetComponent<Transform>().position;
+            AudioManagerBehaviour.instance.Play("Shot");
         }
     }
 
