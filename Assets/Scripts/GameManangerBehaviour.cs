@@ -18,7 +18,7 @@ public class GameManangerBehaviour : MonoBehaviour {
     public Transform enemiesCanvas;
     public GameObject playerShip;
     public GameObject[] livesPanel;
-    private int lives = 0;
+    private int lives = 1;
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
     protected int activeFormationIndex;

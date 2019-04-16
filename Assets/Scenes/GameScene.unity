@@ -398,13 +398,13 @@ MonoBehaviour:
   - name: Fanfare
     clip: {fileID: 8300000, guid: 0f01411432e0cd54a86d2cd356b4a0b5, type: 3}
     loop: 0
-    volume: 0.32
+    volume: 0.1
     pitch: 1
     source: {fileID: 0}
   - name: Shot
     clip: {fileID: 8300000, guid: bcbc23381e8cdcf4ab05f42c9f1cb730, type: 3}
     loop: 0
-    volume: 1
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
 --- !u!1 &519420028

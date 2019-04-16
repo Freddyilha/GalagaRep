@@ -33,6 +33,8 @@ public class GameOverBehaviour : MonoBehaviour {
         //highScoreText.text = GameManangerBehaviour.instance.getFinalScore().ToString();
         GameObject enemiesTable;
 
+        highScoreText.text = GameManangerBehaviour.instance.getFinalScore().ToString();
+
         //Debug.Log("asdasd: " + scoreDict.Keys);
         lineCounter = -2;       /*Valor usado para a alinhar os inimigos derrotados com texto Galaga*/
         foreach (var alien in GameManangerBehaviour.instance.deathsDict)
