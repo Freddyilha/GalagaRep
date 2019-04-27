@@ -15,16 +15,16 @@ public class GameManangerBehaviour : MonoBehaviour {
     public Text scoreText;
     private int scoreTextToInt;
     [HideInInspector] public GameObject[] playerShipIconList;
-    public Transform enemiesCanvas;
     public GameObject playerShip;
     public GameObject[] livesPanel;
     private int lives = 1;
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
+    protected Transform enemieFormationTransform;
     protected int activeFormationIndex;
     private bool gameOverFlag;
     [HideInInspector] public bool restartingGameFlag;
-
+    [SerializeField] private GameObject enemieTransformPreFab; 
 
     void Awake()
     {
@@ -71,8 +71,10 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     protected void createFormation()
     {
+
+        enemieFormationTransform = Instantiate<GameObject>(enemieTransformPreFab).transform;
         activeFormation = Instantiate<GameObject>(alienFormationList[activeFormationIndex]).transform;
-        activeFormation.SetParent(enemiesCanvas.transform);
+        activeFormation.SetParent(enemieFormationTransform);
         activeFormation.localPosition = Vector3.zero;
         //Debug.Log("child Count: " + activeFormation.childCount);
         activeFormationEnemiesCount = activeFormation.childCount;
