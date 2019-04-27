@@ -83,6 +83,7 @@ public class GameOverBehaviour : MonoBehaviour {
 	void Update () {
         if (Input.anyKey)
         {
+            GameManangerBehaviour.instance.restartingGameFlag = true;
             SceneManager.LoadScene("GameScene");
         }
     }

@@ -23,6 +23,8 @@ public class GameManangerBehaviour : MonoBehaviour {
     protected Transform activeFormation;
     protected int activeFormationIndex;
     private bool gameOverFlag;
+    [HideInInspector] public bool restartingGameFlag;
+
 
     void Awake()
     {
@@ -36,7 +38,6 @@ public class GameManangerBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start () {
         StartCoroutine(waitForFanfare());
-        
 	}
 	
 	// Update is called once per frame
@@ -49,8 +50,8 @@ public class GameManangerBehaviour : MonoBehaviour {
                 if (activeFormationIndex >= alienFormationList.Length)
                 {
                     //Debug.Log("Troquei!!!");
-                    SceneManager.LoadScene("GameOver");
                     gameOverFlag = true;
+                    SceneManager.LoadScene("GameOver");
                     //SceneManager.UnloadScene("GameScene");
                 }
                 else
@@ -60,6 +61,11 @@ public class GameManangerBehaviour : MonoBehaviour {
                 }
             
             }
+        }
+        if (restartingGameFlag == true)
+        {
+            restartingGameFlag = false;
+            StartCoroutine(waitForFanfare());
         }
     }
 
@@ -140,6 +146,7 @@ public class GameManangerBehaviour : MonoBehaviour {
         createEnemies();
         createPlayerShip();
         gameOverFlag = false;
+        restartingGameFlag = false;
     }
     
     public IEnumerator waitForFanfare()
