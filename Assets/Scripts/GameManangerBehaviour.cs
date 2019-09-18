@@ -12,11 +12,11 @@ public class GameManangerBehaviour : MonoBehaviour {
     public Dictionary <string, int> deathsDict;
     public GameObject[] alienFormationList;
     public GameObject[] alienList;
-    public Text scoreText;
+    //public GameObject scoreTextPreFab;
+    //private GameObject derp;
     private int scoreTextToInt;
     [HideInInspector] public GameObject[] playerShipIconList;
     public GameObject playerShip;
-    public GameObject[] livesPanel;
     private int lives = 1;
     private int activeFormationEnemiesCount;
     protected Transform activeFormation;
@@ -24,7 +24,11 @@ public class GameManangerBehaviour : MonoBehaviour {
     protected int activeFormationIndex;
     private bool gameOverFlag;
     [HideInInspector] public bool restartingGameFlag;
-    [SerializeField] private GameObject enemieTransformPreFab; 
+    [SerializeField] private GameObject enemieTransformPreFab;
+    public GameObject gameCanvas;
+
+    public Text scoreText;
+    public GameObject[] livesPanel;
 
     void Awake()
     {
@@ -59,7 +63,6 @@ public class GameManangerBehaviour : MonoBehaviour {
                     createFormation();
                     createEnemies();
                 }
-            
             }
         }
         if (restartingGameFlag == true)
@@ -71,7 +74,6 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     protected void createFormation()
     {
-
         enemieFormationTransform = Instantiate<GameObject>(enemieTransformPreFab).transform;
         activeFormation = Instantiate<GameObject>(alienFormationList[activeFormationIndex]).transform;
         activeFormation.SetParent(enemieFormationTransform);
@@ -82,7 +84,6 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     protected void createEnemies()
     {
-
         //Itera por todos os filhos, pois o transform possui nativamente um GetIterator com seus filhos.
         foreach (Transform item in activeFormation)
         {
@@ -101,6 +102,7 @@ public class GameManangerBehaviour : MonoBehaviour {
 
     public void onEnemieDeath(string alienKilled)
     {
+        //Debug.Log("alien: " + alienKilled);
         int.TryParse(scoreText.text, out scoreTextToInt);
         scoreTextToInt += 50;
         scoreText.text = scoreTextToInt.ToString();
@@ -119,7 +121,8 @@ public class GameManangerBehaviour : MonoBehaviour {
     {
         GameObject player;
         player = Instantiate<GameObject>(playerShip);
-        player.transform.position = new Vector2(-0.1f, -4.75f); 
+        player.transform.position = new Vector2(-0.1f, -4.75f);
+        lives = 1;
     }
 
     public void onPlayerHit()
@@ -143,6 +146,8 @@ public class GameManangerBehaviour : MonoBehaviour {
     public void onNewGame()
     {
         deathsDict = new Dictionary<string, int>();
+        //derp = Instantiate<GameObject>(scoreTextPreFab);
+        //Debug.Log("transform: " + derp.transform.localPosition);
         activeFormationIndex = 0;
         createFormation();
         createEnemies();
@@ -153,9 +158,9 @@ public class GameManangerBehaviour : MonoBehaviour {
     
     public IEnumerator waitForFanfare()
     {
-        AudioManagerBehaviour.instance.Play("Fanfare");
+        //AudioManagerBehaviour.instance.Play("Fanfare");
         gameOverFlag = true;
-        yield return new WaitForSecondsRealtime(7);
+        yield return new WaitForSecondsRealtime(1);
         onNewGame();
     }
 }
